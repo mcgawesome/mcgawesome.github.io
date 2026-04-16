@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David McGaw — Design Strategist</title>
+    <meta name="description" content="David McGaw is a Design Strategist and UX Research Lead at Google DeepMind, working at the intersection of human-centered design and artificial intelligence.">
+
+    <!-- Self-hosted webfonts: TC Seraphine (display + body) + TC Petal & Quill (hero name) -->
+    <link rel="preload" href="assets/fonts/seraphine-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/seraphine-regular-italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/petal-quill-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Google Fonts kept as a secondary fallback only (Cormorant Garamond, EB Garamond) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ═══════════════════════════════════
+           SELF-HOSTED WEBFONTS
+           TC Seraphine + TC Petal & Quill, licensed from Tom Chalky.
+           Converted OTF → WOFF2 for delivery.
+        ═══════════════════════════════════ */
+
+        @font-face {
+            font-family: 'Seraphine';
+            src: url('assets/fonts/seraphine-light.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Seraphine';
+            src: url('assets/fonts/seraphine-light-italic.woff2') format('woff2');
+            font-weight: 300;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Seraphine';
+            src: url('assets/fonts/seraphine-regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Seraphine';
+            src: url('assets/fonts/seraphine-regular-italic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Seraphine';
+            src: url('assets/fonts/seraphine-bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Seraphine';
+            src: url('assets/fonts/seraphine-bold-italic.woff2') format('woff2');
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Petal Quill';
+            src: url('assets/fonts/petal-quill-regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* ═══════════════════════════════════
+           RESET & CUSTOM PROPERTIES
+        ═══════════════════════════════════ */
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* ── Palette ── */
+            --bg:           #F5F2EC;   /* warm paper */
+            --bg-alt:       #EDE9E1;   /* slightly deeper, for section contrast */
+            --hero-bg:      #131110;   /* near-black, warm */
+            --text:         #1C1714;   /* warm near-black */
+            --text-muted:   #6B5F57;   /* warm mid-grey */
+            --text-light:   #A0928A;   /* warm light grey */
+            --accent:       #2C4A6E;   /* deep slate blue */
+            --accent-hover: #1A3150;
+            --rule:         #D8D2C8;   /* warm rule / border */
+            --hero-fg:      #F5F2EC;   /* text on dark */
+            --hero-muted:   rgba(245, 242, 236, 0.52);
+
+            /* ── Typefaces ── */
+            --display: 'Seraphine', 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+            --body:    'Seraphine', 'EB Garamond', Georgia, 'Times New Roman', serif;
+            --script:  'Petal Quill', 'Seraphine', 'Cormorant Garamond', cursive;
+
+            /* ── Fluid type scale ── */
+            --size-hero:   clamp(5.5rem, 13vw, 12rem);
+            --size-h1:     clamp(2.25rem, 4.5vw, 3.6rem);
+            --size-h2:     clamp(1.6rem, 2.8vw, 2.25rem);
+            --size-h3:     clamp(1.2rem, 1.8vw, 1.5rem);
+            --size-body:   clamp(1.05rem, 1.35vw, 1.2rem);
+            --size-label:  clamp(0.72rem, 0.9vw, 0.82rem);
+
+            /* ── Rhythm (Bringhurst) ── */
+            --leading:  1.67;
+            --measure:  63ch;          /* ~65 char ideal line length */
+
+            /* ── Spacing ── */
+            --sp-xs:   0.5rem;
+            --sp-sm:   1rem;
+            --sp-md:   2rem;
+            --sp-lg:   4rem;
+            --sp-xl:   6.5rem;
+            --sp-2xl: 10rem;
+
+            /* ── Layout ── */
+            --max-w:    1260px;
+            --margin:   clamp(1.5rem, 5vw, 4rem);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: var(--size-body);
+            line-height: var(--leading);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
+            font-variant-ligatures: common-ligatures;
+        }
+
+
+        /* ═══════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════ */
+
+        #nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem var(--margin);
+            transition: background 0.45s ease, box-shadow 0.45s ease;
+        }
+
+        #nav.scrolled {
+            background: rgba(245, 242, 236, 0.93);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 0 var(--rule);
+        }
+
+        .nav-wordmark {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.15rem;
+            letter-spacing: 0.01em;
+            color: var(--hero-fg);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        #nav.scrolled .nav-wordmark {
+            color: var(--text);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 2.75rem;
+        }
+
+        .nav-list a {
+            font-family: var(--body);
+            font-size: var(--size-label);
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--hero-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        #nav.scrolled .nav-list a {
+            color: var(--text-muted);
+        }
+
+        .nav-list a:hover,
+        #nav.scrolled .nav-list a:hover {
+            color: var(--accent);
+        }
+
+
+        /* ═══════════════════════════════════
+           HERO
+        ═══════════════════════════════════ */
+
+        #home {
+            min-height: 100vh;
+            background: var(--hero-bg);
+            display: grid;
+            grid-template-columns: var(--margin) 1fr var(--margin);
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle atmospheric depth */
+        #home::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 65%, rgba(44, 74, 110, 0.14) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 15%, rgba(19, 17, 16, 0.6) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Thin vertical rule—Swiss grid accent */
+        #home::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            left: calc(var(--margin) + 2px);
+            width: 1px;
+            background: rgba(245, 242, 236, 0.06);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            grid-column: 2;
+            padding-top: 7rem;
+            padding-bottom: 5rem;
+        }
+
+        /* The big hero name — Petal & Quill handwritten script.
+           Scripts carry their own slant, so italic is not applied.
+           Letter-spacing is relaxed slightly — script faces need breathing room. */
+        .hero-name {
+            font-family: var(--script);
+            font-style: normal;
+            font-weight: 400;
+            font-size: var(--size-hero);
+            line-height: 0.95;
+            color: var(--hero-fg);
+            letter-spacing: 0;
+            margin-bottom: 0.5em;
+        }
+
+        /* Ampersand stays in Petal & Quill (inherits from .hero-name) — gently softened
+           so it reads as a conjunction leading into the roles that follow */
+        .hero-name .amp {
+            color: rgba(245, 242, 236, 0.55);
+            margin-left: 0.02em;
+        }
+
+        /* Role list—the portfolio's "sum of selves" concept */
+        .hero-roles {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0;
+            margin: var(--sp-md) 0 var(--sp-lg);
+            max-width: 780px;
+        }
+
+        .hero-role {
+            font-family: var(--body);
+            font-size: clamp(0.82rem, 1.2vw, 1rem);
+            color: var(--hero-muted);
+            white-space: nowrap;
+            line-height: 1.8;
+        }
+
+        .hero-role::after {
+            content: '&';
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 300;
+            color: rgba(245, 242, 236, 0.35);
+            margin: 0 0.45em;
+        }
+
+        .hero-role:last-child::after {
+            content: none;
+        }
+
+        .hero-rule {
+            width: 3.5rem;
+            height: 1px;
+            background: rgba(245, 242, 236, 0.22);
+            margin-bottom: var(--sp-md);
+        }
+
+        .hero-statement {
+            font-family: var(--body);
+            font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+            line-height: 1.55;
+            color: rgba(245, 242, 236, 0.78);
+            max-width: 560px;
+        }
+
+        .hero-statement em {
+            font-style: italic;
+            color: var(--hero-fg);
+        }
+
+        .hero-cta {
+            margin-top: var(--sp-lg);
+            display: flex;
+            gap: var(--sp-md);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-link {
+            font-family: var(--body);
+            font-size: var(--size-label);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--hero-fg);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(245, 242, 236, 0.35);
+            padding-bottom: 2px;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .hero-link:hover {
+            border-color: var(--hero-fg);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            right: var(--margin);
+            font-family: var(--body);
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(245, 242, 236, 0.22);
+            writing-mode: vertical-lr;
+        }
+
+
+        /* ═══════════════════════════════════
+           SECTION UTILITIES
+        ═══════════════════════════════════ */
+
+        .section-wrap {
+            padding: var(--sp-2xl) var(--margin);
+        }
+
+        .section-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+        }
+
+        /* Swiss-style section label:—Label */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            font-family: var(--body);
+            font-size: var(--size-label);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: var(--sp-lg);
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 2rem;
+            height: 1px;
+            background: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+
+        /* ═══════════════════════════════════
+           ABOUT
+        ═══════════════════════════════════ */
+
+        #about {
+            background: var(--bg);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: clamp(3rem, 7vw, 7rem);
+            align-items: start;
+        }
+
+        /* Photo column—sticky as you scroll the text */
+        .about-photo-col {
+            position: sticky;
+            top: 5.5rem;
+        }
+
+        .about-photo {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: center 35%;
+            filter: grayscale(10%) contrast(1.04) brightness(0.98);
+        }
+
+        .photo-caption {
+            margin-top: 0.85rem;
+            font-size: var(--size-label);
+            letter-spacing: 0.07em;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        /* Text column */
+        .about-text h2 {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 400;
+            font-size: var(--size-h1);
+            line-height: 1.08;
+            letter-spacing: -0.015em;
+            color: var(--text);
+            margin-bottom: var(--sp-lg);
+        }
+
+        .about-text p {
+            max-width: var(--measure);
+            margin-bottom: var(--sp-md);
+            color: var(--text);
+        }
+
+        .about-text p em {
+            font-style: italic;
+        }
+
+        /* Drop-cap first paragraph (Bringhurst-appropriate) */
+        .about-text p.lead::first-letter {
+            font-family: var(--display);
+            font-size: 3.8em;
+            font-weight: 400;
+            line-height: 0.75;
+            float: left;
+            margin-right: 0.1em;
+            margin-top: 0.08em;
+            color: var(--text);
+        }
+
+        /* Credentials—asymmetric grid strip */
+        .credentials {
+            margin-top: var(--sp-xl);
+            padding-top: var(--sp-lg);
+            border-top: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--sp-md) var(--sp-lg);
+        }
+
+        .cred-label {
+            font-size: var(--size-label);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .cred-value {
+            font-family: var(--display);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .cred-value a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .cred-value a:hover {
+            border-color: var(--accent);
+        }
+
+
+        /* ═══════════════════════════════════
+           EMERGING IDEAS
+        ═══════════════════════════════════ */
+
+        #emerging {
+            background: var(--bg-alt);
+        }
+
+        .ideas-intro {
+            max-width: 700px;
+            margin-bottom: var(--sp-xl);
+        }
+
+        .ideas-intro h2 {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 400;
+            font-size: var(--size-h1);
+            line-height: 1.1;
+            letter-spacing: -0.015em;
+            color: var(--text);
+            margin-top: var(--sp-sm);
+            margin-bottom: var(--sp-md);
+        }
+
+        .ideas-intro p {
+            color: var(--text-muted);
+            font-size: clamp(1rem, 1.3vw, 1.1rem);
+            max-width: var(--measure);
+        }
+
+        /* 2 × 2 Swiss grid—1px rule lines between cards */
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--rule);
+            border: 1px solid var(--rule);
+        }
+
+        .idea-card {
+            background: var(--bg-alt);
+            padding: var(--sp-lg);
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s;
+        }
+
+        .idea-card:hover {
+            background: #E7E2D9;
+        }
+
+        /* Large ordinal number—decorative but grounded */
+        .idea-num {
+            font-family: var(--display);
+            font-weight: 300;
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--rule);
+            letter-spacing: -0.04em;
+            margin-bottom: var(--sp-sm);
+            user-select: none;
+        }
+
+        .idea-tag {
+            font-size: var(--size-label);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: var(--sp-xs);
+            /* The tag must NOT absorb flex-grow: 1 from .idea-card p —
+               otherwise in a stretched grid row it pushes h3 and body copy down. */
+            flex-grow: 0;
+        }
+
+        .idea-card h3 {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 500;
+            font-size: var(--size-h2);
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            margin-top: 0;
+            margin-bottom: var(--sp-md);
+        }
+
+        .idea-card p {
+            font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+            line-height: 1.62;
+            color: var(--text-muted);
+            max-width: 44ch;
+            flex-grow: 1;
+        }
+
+        .idea-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: var(--sp-md);
+            font-size: var(--size-label);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
+            width: fit-content;
+            transition: border-color 0.3s, gap 0.3s;
+        }
+
+        .idea-link::after {
+            content: '→';
+        }
+
+        .idea-link:hover {
+            border-color: var(--accent);
+            gap: 0.85rem;
+        }
+
+
+        /* ═══════════════════════════════════
+           CONTACT
+        ═══════════════════════════════════ */
+
+        #contact {
+            background: var(--hero-bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-xl);
+            align-items: end;
+        }
+
+        .contact-text .section-label {
+            color: rgba(245, 242, 236, 0.28);
+        }
+
+        .contact-text .section-label::before {
+            background: rgba(245, 242, 236, 0.28);
+        }
+
+        .contact-text h2 {
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 400;
+            font-size: var(--size-h1);
+            line-height: 1.08;
+            letter-spacing: -0.015em;
+            color: var(--hero-fg);
+            margin-top: var(--sp-sm);
+        }
+
+        .contact-text p {
+            color: var(--hero-muted);
+            margin-top: var(--sp-md);
+            max-width: 42ch;
+            font-size: clamp(1rem, 1.3vw, 1.1rem);
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-md);
+        }
+
+        .contact-link {
+            font-family: var(--display);
+            font-style: italic;
+            font-size: var(--size-h2);
+            color: var(--hero-fg);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(245, 242, 236, 0.2);
+            padding-bottom: 0.3rem;
+            width: fit-content;
+            transition: border-color 0.3s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--hero-fg);
+        }
+
+
+        /* ═══════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════ */
+
+        footer {
+            background: var(--hero-bg);
+            padding: 1.5rem var(--margin);
+            border-top: 1px solid rgba(245, 242, 236, 0.07);
+        }
+
+        .footer-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        footer p {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(245, 242, 236, 0.18);
+        }
+
+
+
+        /* ═══════════════════════════════════
+           SECTION ORNAMENT (armillary sphere)
+        ═══════════════════════════════════ */
+
+        .section-ornament {
+            text-align: center;
+            margin: var(--sp-xl) 0 var(--sp-lg);
+            color: var(--rule);
+            line-height: 0;
+        }
+
+        .section-ornament svg {
+            width: 80px;
+            height: 80px;
+        }
+
+        /* ═══════════════════════════════════
+           CURRENT INSPIRATIONS
+        ═══════════════════════════════════ */
+
+        #inspirations {
+            background: var(--bg);
+        }
+
+        .inspirations-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-lg) var(--sp-xl);
+            margin-top: var(--sp-xl);
+        }
+
+        .insp-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            padding-bottom: var(--sp-md);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .insp-category {
+            font-family: var(--body);
+            font-size: var(--size-label);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        .insp-title {
+            font-family: var(--display);
+            font-style: italic;
+            font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        .insp-note {
+            font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+            color: var(--text-muted);
+            line-height: 1.55;
+            max-width: 38ch;
+        }
+
+        /* Roman spans inside an otherwise-italic insp-title —
+           used for bylines, subtitles, painting titles in quotation marks. */
+        .insp-title .roman { font-style: normal; }
+        .insp-title.roman  { font-style: normal; }
+
+        @media (max-width: 700px) {
+            .inspirations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ═══════════════════════════════════
+           ANNOTATION SYSTEM ("BREATHING FIELD")
+           Phrases look normal at rest.
+           On hover: red underline draws left→right,
+           then an editorial card lifts above the text.
+           Nothing is in your face. Slow readers find it.
+        ═══════════════════════════════════ */
+
+        .ann {
+            position: relative;
+            cursor: default;
+        }
+
+        /* The underline — scaleX(0) at rest, draws on hover */
+        .ann::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #c0392b;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.4s ease;
+            pointer-events: none;
+        }
+
+        .ann:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* The annotation card — dark, italic, editorial */
+        .ann-card {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 0;
+            width: 288px;
+            background: #1c1714;
+            color: rgba(245, 242, 236, 0.85);
+            font-family: var(--body);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.58;
+            padding: 0.85rem 1.1rem;
+            border-radius: 1px;
+            opacity: 0;
+            transform: translateY(6px);
+            /* Slight delay so underline draws first */
+            transition: opacity 0.28s ease 0.15s, transform 0.28s ease 0.15s;
+            pointer-events: auto;
+            z-index: 100;
+            white-space: normal;
+        }
+
+        /* Links inside annotation cards */
+        .ann-card a {
+            color: rgba(245, 242, 236, 0.6);
+            text-decoration: underline;
+            text-decoration-color: #c0392b;
+            text-underline-offset: 2px;
+            transition: color 0.2s;
+        }
+
+        .ann-card a:hover {
+            color: var(--hero-fg);
+        }
+
+        .ann:hover .ann-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Right-edge variant: card opens leftward instead */
+        .ann.ann-r .ann-card {
+            left: auto;
+            right: 0;
+        }
+
+        /* ═══════════════════════════════════
+           SELECTION
+        ═══════════════════════════════════ */
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+
+        /* ═══════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════ */
+
+        @media (max-width: 960px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: var(--sp-lg);
+            }
+
+            .about-photo-col {
+                position: static;
+                max-width: 260px;
+            }
+
+            .ideas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: var(--sp-lg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --sp-2xl: 5rem;
+                --sp-xl: 3.5rem;
+            }
+
+            .nav-list {
+                gap: 1.5rem;
+            }
+
+            .hero-roles {
+                display: none;
+            }
+
+            .hero-scroll {
+                display: none;
+            }
+
+            .credentials {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-text p.lead::first-letter {
+                font-size: 2.8em;
+            }
+        }
+
+
+        .idea-implication {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--rule);
+        }
+        .idea-implication-label {
+            font-family: var(--display);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--slate);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .idea-implication p {
+            font-size: 0.9rem;
+            color: rgba(28,23,20,0.68);
+            line-height: 1.62;
+            margin: 0;
+        }
+
+        /* ═══════════════════════════════════
+           PRACTICE: persona stack diagram
+        ═══════════════════════════════════ */
+
+        .persona-stack-figure {
+            margin: var(--sp-xl) auto var(--sp-lg);
+            max-width: 640px;
+            padding: 0;
+        }
+
+        .persona-stack {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .persona-stack .band {
+            fill: var(--accent);
+            stroke: var(--accent);
+            stroke-width: 0.75;
+        }
+        .persona-stack .band-cold    { fill-opacity: 0.06; stroke-opacity: 0.22; }
+        .persona-stack .band-exhaust { fill-opacity: 0.16; stroke-opacity: 0.45; }
+        .persona-stack .band-warm    { fill-opacity: 0.3;  stroke-opacity: 0.80; }
+
+        .persona-stack .band-title {
+            font-family: var(--display);
+            font-style: italic;
+            font-size: 22px;
+            fill: var(--text);
+        }
+        .persona-stack .band-items {
+            font-family: var(--body);
+            font-size: 14px;
+            fill: var(--text-muted);
+        }
+        .persona-stack .connector {
+            stroke: var(--text-muted);
+            stroke-width: 0.8;
+            fill: none;
+        }
+        .persona-stack .connector-dot {
+            fill: var(--text-muted);
+        }
+        .persona-stack .caption {
+            font-family: var(--body);
+            font-style: italic;
+            font-size: 14px;
+            fill: var(--text-muted);
+        }
+
+        .practice-implication {
+            margin-top: var(--sp-lg);
+            max-width: var(--measure);
+            padding-top: var(--sp-md);
+            border-top: 1px solid var(--rule);
+        }
+        .practice-implication p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.67;
+            margin-top: 0.5rem;
+            max-width: var(--measure);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════
+         NAVIGATION
+    ═══════════════════════════════════ -->
+    <nav id="nav" role="navigation" aria-label="Main navigation">
+        <a href="#home" class="nav-wordmark">David McGaw</a>
+        <ul class="nav-list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#practice">Practice</a></li>
+            <li><a href="#emerging">Ideas</a></li>
+            <li><a href="#inspirations">Now</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- ═══════════════════════════════════
+         HERO
+    ═══════════════════════════════════ -->
+    <section id="home" aria-label="Introduction">
+        <div class="hero-inner">
+
+            <h1 class="hero-name">
+                David<span class="amp">&amp;</span>
+            </h1>
+
+            <!-- The portfolio’s "sum of selves" concept, adapted for web -->
+            <div class="hero-roles" aria-label="Career roles">
+                <span class="hero-role">Campus Minister</span>
+                <span class="hero-role">Graphic Designer</span>
+                <span class="hero-role">Brand Strategist</span>
+                <span class="hero-role">Choral Musician</span>
+                <span class="hero-role">Management Consultant</span>
+                <span class="hero-role">Teacher</span>
+                <span class="hero-role">Author</span>
+                <span class="hero-role">Innovation Strategist</span>
+                <span class="hero-role">UX Researcher</span>
+                <span class="hero-role">Design Strategist</span>
+            </div>
+
+            <div class="hero-rule" aria-hidden="true"></div>
+
+            <p class="hero-statement">
+                I’ve spent thirty years asking the same question:<br>
+                <em>how do people make sense of things?</em><br>
+                The institutions change. The question stays.
+            </p>
+
+            <div class="hero-cta">
+                <a href="#about" class="hero-link">About David</a>
+                <a href="#emerging" class="hero-link">Emerging Ideas</a>
+            </div>
+
+        </div>
+
+        <span class="hero-scroll" aria-hidden="true">Scroll</span>
+    </section>
+
+
+    <!-- ═══════════════════════════════════
+         ABOUT
+    ═══════════════════════════════════ -->
+    <section id="about" class="section-wrap">
+        <div class="section-inner">
+
+            <div class="section-label reveal">About</div>
+
+            <div class="about-grid">
+
+                <!-- Photo—sticky as the text scrolls -->
+                <div class="about-photo-col reveal delay-1">
+                    <img
+                        src="assets/saltlake.jpeg"
+                        alt="David McGaw at the Great Salt Lake"
+                        class="about-photo"
+                    >
+                </div>
+
+                <!-- Narrative text -->
+                <div class="about-text">
+
+                    <h2 class="reveal delay-1">
+                        Design Strategist.<br>Human-centered<br>from the start.
+                    </h2>
+
+                    <p class="lead reveal delay-2">
+                        History teaches you to ask: <em>how did we get here?</em> Design teaches you to ask: <em>where could we go?</em> Research teaches you to ask: <em>what do people actually need?</em> Spend thirty years cycling through these questions and you start to realize they are the same question, viewed from different angles.
+                    </p>
+
+                    <p class="reveal delay-2">
+                        I came to design by an indirect route—<span class="ann">a History degree from Yale<span class="ann-card">I wrote my senior thesis on the Roman emperor Trajan (but was secretly more enamored with the letterforms carved on his famous Column than with his string of military victories in Dacia).</span></span>, a decade in brand strategy, graduate work at IIT’s Institute of Design, a stint at <span class="ann">McKinsey<span class="ann-card">My favorite project: researching and co-authoring a comprehensive look at philanthropic prizes. <a href="https://www.mckinsey.com/industries/social-sector/our-insights/and-the-winner-is-philanthropists-and-governments-make-prizes-count" target="_blank" rel="noopener">Read it ↗</a></span></span>, years of innovation consulting at <span class="ann">Doblin and LUNAR<span class="ann-card">Doblin (founded 1981 by Jay Doblin in Chicago) was among the first firms to treat innovation as a designable system rather than a lucky accident. LUNAR, a San Francisco firm founded in 1984, was acquired by McKinsey in 2015. Both shaped what design-led strategy consulting eventually became.</span></span>—before arriving at Google in 2017 to lead a UX research team for Google Assistant and, later, a portfolio of emerging technology initiatives: AI for climate change, home robotics, quantum computing, and what it means for humans and machines to genuinely collaborate. Since 2024 I have been at Google DeepMind, working on what I can only describe as the most consequential design problem of my lifetime: how to build artificial intelligence that genuinely serves human beings.
+                    </p>
+
+                    <p class="reveal delay-3">
+                        Along the way I co-authored <span class="ann"><em>naked innovation: uncovering a shared approach for creating value</em><span class="ann-card">Roger Martin called it “A terrific contribution to the integration of design and management.” <a href="http://nakedinnovation.com" target="_blank" rel="noopener">nakedinnovation.com ↗</a></span></span> (IIT Institute of Design, 2007) with Zachary Jean Paradis. I taught in IIT’s graduate design program for five years, and gave a visiting lecture series at CEDIM in Monterrey, Mexico. I am a choral musician, a committed Anglican, a hiker with a fondness for the Sierras, and a tech worker who ponders ephemeral questions of beauty.
+                    </p>
+
+                    <p class="reveal delay-3">
+                        Maybe my interests are more random than focused. But I’ve come to believe that’s actually useful.
+                    </p>
+
+                    <!-- Credentials strip—Swiss-style tabular layout -->
+                    <div class="credentials reveal delay-4">
+                        <div>
+                            <p class="cred-label">Currently</p>
+                            <p class="cred-value">Google DeepMind</p>
+                        </div>
+                        <div>
+                            <p class="cred-label">Education</p>
+                            <p class="cred-value">Yale University<br>BA History, 1990</p>
+                        </div>
+                        <div>
+                            <p class="cred-label">Graduate</p>
+                            <p class="cred-value">IIT Institute of Design<br>M.Des., 2007</p>
+                        </div>
+                        <div>
+                            <p class="cred-label">Author</p>
+                            <p class="cred-value"><em>naked innovation</em>, 2007</p>
+                        </div>
+                        <div>
+                            <p class="cred-label">Location</p>
+                            <p class="cred-value">San Francisco Bay Area</p>
+                        </div>
+                        <div>
+                            <p class="cred-label">LinkedIn</p>
+                            <p class="cred-value"><a href="https://linkedin.com/in/dmcgaw" target="_blank" rel="noopener">dmcgaw</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════
+         PRACTICE: Insights about Research Insights
+    ═══════════════════════════════════ -->
+    <section id="practice" class="section-wrap">
+        <div class="section-inner">
+
+            <div class="ideas-intro">
+                <div class="section-label reveal">Insights about Research Insights</div>
+                <h2 class="reveal delay-1">Handing off context,<br>not summaries.</h2>
+                <p class="reveal delay-2">
+                    Two recent experiments started from the same frustration—that the most valuable user insight rarely reaches product teams in time, and in a form they can use, at the pace of vibe-coded prototyping. The first asked whether research findings could be delivered as serialized, reality-TV-style episodes, low-cost enough to run from any transcript, structured enough to build genuine narrative arc. It worked. Product teams came back for episode two not because they were scheduled to, but because they wanted to know what happened next. More usefully, it surfaced a deeper question. The most valuable artifact turned out not to be the video—it was the structured model of the user that had to be assembled in order to make the video. The second project followed that thread: <em>synthetic personas as contextual engines</em>—portable, warm-data-rich Markdown files a developer can inject into a vibe-coding session so the AI encounters not a feature brief but a specific human life. The quiet reframe underneath both projects is that the handoff model may be wrong. The better move is not to hand off summaries but to hand off context: the user themselves, portable and present in the room.
+                </p>
+            </div>
+
+            <!-- The layered persona stack — three bands growing richer from cold to warm,
+                 feeding downward into a vibe-coding session -->
+            <figure class="persona-stack-figure reveal delay-3">
+                <svg class="persona-stack" viewBox="0 0 640 490" xmlns="http://www.w3.org/2000/svg"
+                     role="img"
+                     aria-label="Three layers of the synthetic persona: cold data at the top, digital exhaust in the middle, warm data at the bottom, feeding downward into a vibe-coding session">
+
+                    <!-- Layer 1: Cold data (lightest) -->
+                    <rect class="band band-cold" x="40" y="20" width="560" height="90" rx="2"/>
+                    <text class="band-title" x="60" y="55">Cold data</text>
+                    <text class="band-items" x="60" y="88">Demographics · Goals · Frustrations</text>
+
+                    <!-- Layer 2: Digital exhaust -->
+                    <rect class="band band-exhaust" x="40" y="130" width="560" height="110" rx="2"/>
+                    <text class="band-title" x="60" y="165">Digital exhaust</text>
+                    <text class="band-items" x="60" y="198">Jobs to be done · Layered search history</text>
+                    <text class="band-items" x="60" y="220">AI prompt history</text>
+
+                    <!-- Layer 3: Warm data (richest) -->
+                    <rect class="band band-warm" x="40" y="260" width="560" height="130" rx="2"/>
+                    <text class="band-title" x="60" y="295">Warm data</text>
+                    <text class="band-items" x="60" y="328">Physical and sensory context · Calendar and rhythm</text>
+                    <text class="band-items" x="60" y="350">The relational web · Epistemic velocity</text>
+                    <text class="band-items" x="60" y="372">Aesthetic shibboleths</text>
+
+                    <!-- Connector: a thin line from the warm-data band down to the caption -->
+                    <line class="connector" x1="320" y1="400" x2="320" y2="430"/>
+                    <circle class="connector-dot" cx="320" cy="433" r="3"/>
+
+                    <!-- Caption -->
+                    <text class="caption" x="320" y="465" text-anchor="middle">Portable context, injected at the top of a vibe-coding session.</text>
+                </svg>
+            </figure>
+
+            <div class="practice-implication reveal delay-4">
+                <span class="idea-implication-label">Product implications</span>
+                <p>What I take from both projects is that research teams have more leverage than we’ve been using. The episodic pipeline is a genuinely low-cost way to make insights land; the synthetic persona framework is already portable enough to use in a vibe-coding session today. The work ahead is to turn the synthesis process itself into a repeatable tool—so any research team can move from transcript to portable context without rebuilding the method each time.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════
+         EMERGING IDEAS
+    ═══════════════════════════════════ -->
+    <section id="emerging" class="section-wrap">
+        <div class="section-inner">
+
+            <div class="ideas-intro">
+                <div class="section-label reveal">Emerging Ideas</div>
+                <h2 class="reveal delay-1">Four questions I can’t<br>stop thinking about.</h2>
+                <p class="reveal delay-2">
+                    These are works in progress—half-formed, genuinely uncertain, and all the more interesting for it. They share a common territory: the ways human perception diverges from reality, and what that divergence means now that artificial intelligence has entered the picture.
+                </p>
+            </div>
+
+
+            <!-- Armillary sphere ornament — inline SVG, historically the
+                 frontispiece device of humanist and scientific books.
+                 Speaks to navigation, orientation, judgment under uncertainty. -->
+            <div class="section-ornament reveal delay-3" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"
+                     fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Outer equatorial ring -->
+                    <circle cx="100" cy="100" r="74" stroke-width="1"/>
+                    <!-- Tropics (inner parallel rings) -->
+                    <ellipse cx="100" cy="100" rx="74" ry="28" stroke-width="0.7"/>
+                    <ellipse cx="100" cy="76"  rx="74" ry="10" stroke-width="0.5" opacity="0.5"/>
+                    <ellipse cx="100" cy="124" rx="74" ry="10" stroke-width="0.5" opacity="0.5"/>
+                    <!-- Meridian great circle (vertical, foreshortened) -->
+                    <ellipse cx="100" cy="100" rx="19" ry="74" stroke-width="0.9"/>
+                    <!-- Second great circle, rotated 60° -->
+                    <ellipse cx="100" cy="100" rx="19" ry="74"
+                             transform="rotate(60 100 100)" stroke-width="0.9"/>
+                    <!-- Ecliptic ring, tilted 23° -->
+                    <ellipse cx="100" cy="100" rx="74" ry="22"
+                             transform="rotate(-23 100 100)" stroke-width="0.8" stroke-dasharray="4 2"/>
+                    <!-- Polar axis -->
+                    <line x1="100" y1="26" x2="100" y2="174" stroke-width="0.6"/>
+                    <!-- Pivot caps at poles -->
+                    <circle cx="100" cy="26"  r="3.5" stroke-width="0.8"/>
+                    <circle cx="100" cy="174" r="3.5" stroke-width="0.8"/>
+                    <!-- Central earth/sphere -->
+                    <circle cx="100" cy="100" r="9" stroke-width="1"/>
+                    <!-- Base stand -->
+                    <line x1="100" y1="174" x2="75"  y2="191" stroke-width="0.8"/>
+                    <line x1="100" y1="174" x2="125" y2="191" stroke-width="0.8"/>
+                    <line x1="68"  y1="193" x2="132" y2="193" stroke-width="1"/>
+                    <!-- Small decorative tick marks on equatorial ring (compass-like) -->
+                    <g stroke-width="0.6" opacity="0.7">
+                        <line x1="174" y1="100" x2="180" y2="100"/>
+                        <line x1="26"  y1="100" x2="20"  y2="100"/>
+                        <line x1="100" y1="26"  x2="100" y2="20"/>
+                        <line x1="100" y1="174" x2="100" y2="180"/>
+                        <line x1="152" y1="152" x2="157" y2="157"/>
+                        <line x1="48"  y1="48"  x2="43"  y2="43"/>
+                        <line x1="48"  y1="152" x2="43"  y2="157"/>
+                        <line x1="152" y1="48"  x2="157" y2="43"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="ideas-grid">
+
+                <!-- 01: The Bait of Beauty -->
+                <div class="idea-card reveal">
+                    <div class="idea-num" aria-hidden="true">01</div>
+                    <p class="idea-tag">AI · Aesthetics · Epistemology</p>
+                    <h3>The Bait of Beauty:<br>Form and Truth in the Age of AI</h3>
+                    <p>
+                        We use beauty as a proxy for truth—a perceptual shortcut so ancient and so useful that we barely notice we’re doing it. Beautiful things tend to be well-made, carefully considered, authentically crafted. The Mona Lisa earns our trust before we consciously decide to give it. AI has become extraordinarily good at generating formal beauty: the kind that registers immediately through the senses rather than through slow deliberation. Which means the shortcut is now broken. The heuristic that helped us navigate the world for millennia is increasingly unreliable. It is worth asking what was actually doing the work.
+                    </p>
+
+                    <div class="idea-implication">
+                        <span class="idea-implication-label">Product implications</span>
+                        <p>Responsible interfaces need to be inspectable and reveal AI “fingerprints.” I’m proud of colleagues’ work on <a href="https://deepmind.google/technologies/synthid/" target="_blank" rel="noopener" style="color:inherit;text-decoration-color:var(--slate);">SynthID</a> and have made some small contributions to understanding how users understand it. More broadly, AI product developers should recognize the transformed landscape: truth claims need to be backed up with facts and reasoning, not just excellent presentation.</p>
+                    </div>
+                </div>
+
+                <!-- 02: Consequentiality -->
+                <div class="idea-card reveal delay-1">
+                    <div class="idea-num" aria-hidden="true">02</div>
+                    <p class="idea-tag">AI · Agent Design · Trust</p>
+                    <h3>Consequentiality:<br>Your Worst Fears (That Aren’t Even That Likely)</h3>
+                    <p>
+                        Think about the first time you sat behind the wheel of a car. You weren’t processing abstract collision statistics—you were gripped by the visceral <em>what if</em> of a missed brake, a wrong turn, a consequence you couldn’t undo. This is the essence of consequentiality: the felt sense of potential outcome that routinely trumps rational risk assessment. As AI systems move from simple task execution toward complex, multi-step agent journeys, users encounter an uneven landscape of stakes. Retrieving options feels safe; sending the actual email does not. Touching multiple data sources in sequence conjures fears of unknown and unexpectable interactions. The gap between what AI systems actually risk and what users feel they risk is a design problem—and an emotional one—that the field has barely begun to address.
+                    </p>
+
+                    <div class="idea-implication">
+                        <span class="idea-implication-label">Product implications</span>
+                        <p>I advise AI product leaders on ways to more empathetically anticipate user concerns and over-invest in proactive transparency. Distinguishing between what feels irreversible, and what can actually be changed, helps reduce anxiety.</p>
+                    </div>
+                </div>
+
+                <!-- 03: Probabilacy -->
+                <div class="idea-card reveal delay-2">
+                    <div class="idea-num" aria-hidden="true">03</div>
+                    <p class="idea-tag">AI · Cognition · Information Design</p>
+                    <h3>Probabilacy:<br>Chances Are You’re Doing it Wrong</h3>
+                    <p>
+                        Imagine a winding mountain road in thick fog. You have a map—a digital proxy of the terrain—but the immediate challenge is something I’ve come to call <em>probabilacy</em>: the ability to understand and act upon uncertain information. Much like literacy, it’s a capacity most people think they have in greater measure than they do. Not all uncertainty feels the same. <span class="ann">Aleatory uncertainty<span class="ann-card">From Latin <em style="font-style:normal;text-decoration:underline;text-decoration-color:#c0392b;">alea</em> — the die. The same root as Caesar’s “alea iacta est.” Aleatory uncertainty is irreducible: no further information tells you which face will show. The only rational response is to prepare for multiple outcomes simultaneously.</span></span>—pure chance—calls for hedging, keeping options open. Epistemic uncertainty—where a binary truth exists and somebody knows it—generates hunger: users don’t want a cloud of possibilities, they want the answer. When people look at a weather forecast, they’re rarely thinking statistically. Designing for that distinction, rather than papering over it with vague percentages and emoji clouds, is one of the most consequential opportunities in AI-powered information design.
+                    </p>
+
+                    <div class="idea-implication">
+                        <span class="idea-implication-label">Product implications</span>
+                        <p>Even the simplest weather forecasts can be misunderstood. Standardizing presentation (I still think percentages are the best) helps, but we need to parse out real-life effects—if it’s 40% chance of rain, do you need an umbrella? How you help a user process that “fuzzy” future directly affects whether they believe you’ve helped.</p>
+                    </div>
+                </div>
+
+                <!-- 04: Taste -->
+                <div class="idea-card reveal delay-3">
+                    <div class="idea-num" aria-hidden="true">04</div>
+                    <p class="idea-tag">AI · Discernment · Warm Data</p>
+                    <h3>Taste:<br>The Sourdough Starter of the Mind</h3>
+                    <p>
+                        Ask a serious baker about their sourdough starter and they’ll tell you things that sound like they’re describing a person. It has a history. It has a personality. It responds to what it’s been fed, to the temperature, to whether you’ve been attentive or neglectful. Human taste works the same way—not a preference list but a living culture, accumulated over time, responsive to every new ingredient the world adds to the jar. What makes it generative is precisely that it can’t be replicated from the recipe alone. AI has processed every loaf ever written about; it has never kept a starter alive for three years. That gap has a name. Nora Bateson calls it <em>warm data</em>—the relational, transcontextual information that gets stripped away in transit to any training corpus. Taste, in this light, is less about judgment (pattern-matching, at which AI is formidable) than discernment: the capacity to tell the right word from the nearly right word, the lightning from the lightning-bug. In an era where formal competence becomes cheap, editorial authority becomes the rarest thing—and it belongs to those who can recognize when something is <span class="ann ann-r"><em>technically correct but contextually hollow</em><span class="ann-card">The phrase that prompted this essay. AI can satisfy every formal criterion—rhythm, structure, vocabulary—while missing what the moment actually requires. Recognizing the difference is not a skill that scales, or that can be averaged.</span></span>, and to hold the warmth the collaboration requires.
+                    </p>
+                    <div class="idea-implication">
+                        <span class="idea-implication-label">Product implications</span>
+                        <p>This is early and speculative ground, but the implication that compels me most is that the human is not merely the QA layer at the end of an AI pipeline—they are the source of warmth in the collaboration. The design opportunity is to build interfaces that make that contribution visible, easy, and structural: surfaces that elevate editorial authority rather than automate it away, and a product vocabulary that takes seriously the difference between a user and their warm data.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ═══════════════════════════════════
+         CURRENT INSPIRATIONS
+    ═══════════════════════════════════ -->
+    <section id="inspirations" class="section-wrap">
+        <div class="section-inner">
+
+            <div class="section-label reveal">Current Inspirations</div>
+            <h2 class="reveal delay-1" style="font-family:var(--display);font-style:italic;font-weight:400;font-size:var(--size-h1);line-height:1.1;letter-spacing:-0.015em;color:var(--text);margin-top:var(--sp-sm);">
+                What I’m reading, hearing,<br>and thinking about.
+            </h2>
+
+            <div class="inspirations-grid">
+
+                <div class="insp-item reveal delay-1">
+                    <span class="insp-category">Reading</span>
+                    <span class="insp-title">Citizens: A Chronicle of the French Revolution <span class="roman">by Simon Schama</span></span>
+                    <p class="insp-note">A masterclass in the “high-low” synthesis, grounding the metaphysical abstractions of liberty and terror in the visceral, urgent reality of the skyrocketing price of a loaf of bread. Schama’s ability to weave the personal heroism of individuals into the surging tide of the revolution provides a profound mental model for how history is actually lived.</p>
+                </div>
+
+                <div class="insp-item reveal delay-2">
+                    <span class="insp-category">Listening</span>
+                    <span class="insp-title">In the Silent Night <span class="roman">(В молчаньи ночи тайной) by Sergei Rachmaninoff</span></span>
+                    <p class="insp-note">As I prepare the <em>All-Night Vigil</em> with the <a href="https://www.sfchoral.org/concerts" target="_blank" rel="noopener">SF Choral Society</a>, Rachmaninoff’s earlier songs demand a different kind of devotion. Studying this piece with my voice teacher has revealed its deeply felt, chromatic nature—a romantic intimacy that feels both unhurried and urgent.</p>
+                </div>
+
+                <div class="insp-item reveal delay-3">
+                    <span class="insp-category">Looking at</span>
+                    <span class="insp-title roman">“A Lady Receiving Visitors (The Reception)” by John Frederick Lewis</span>
+                    <p class="insp-note">Revisiting this John Frederick Lewis painting at the Yale Center for British Art after thirty-five years was an exercise in the fallibility of memory. While I had misremembered specific elements of the composition, the vibe that drew me in as an undergraduate remained immutable: the masterful curation of light as it filters through stained glass and carved wood screens, dappling every surface and fabric in a liminal glow.</p>
+                </div>
+
+                <div class="insp-item reveal delay-4">
+                    <span class="insp-category">Thinking about</span>
+                    <span class="insp-title">The Conquest of the Incan Empire <span class="roman">mini-series</span></span>
+                    <p class="insp-note">Listening to this <a href="https://therestishistory.com/episodes/empire-of-gold-part-1" target="_blank" rel="noopener">“The Rest Is History” series</a> has me reflecting on how the collision of two utterly alien civilizations can be viewed as both a grand historical inevitability and a collection of terrifyingly personal encounters.</p>
+                </div>
+
+                <div class="insp-item reveal delay-1">
+                    <span class="insp-category">In the field</span>
+                    <span class="insp-title">Muir Woods National Monument</span>
+                    <p class="insp-note">My weekend hikes often take me to more secluded mountains, coastlines, and redwood groves, but the visit of a friend from Florida gave me a reason to return to the oldest, most grand trees nearby. The texture of the trail and the stillness of the redwoods offer a grounded sensory detail that resets the spirit.</p>
+                </div>
+
+                <div class="insp-item reveal delay-2">
+                    <span class="insp-category">Re-reading</span>
+                    <span class="insp-title">Gaudy Night <span class="roman">by Dorothy L. Sayers</span></span>
+                    <p class="insp-note">Returning to Harriet Vane in the cloisters of Shrewsbury College, I am struck by the intellectual rigor Sayers demands of her characters. It is a meditation on the ultimate cost of love: the difficult, adult choice to remain vulnerable and “accept love” without sacrificing the integrity of the self.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════
+         CONTACT
+    ═══════════════════════════════════ -->
+    <section id="contact" class="section-wrap">
+        <div class="section-inner">
+            <div class="contact-grid">
+
+                <div class="contact-text">
+                    <div class="section-label">Contact</div>
+                    <h2>Let’s think<br>together.</h2>
+                    <p>I’m open to conversations about design, artificial intelligence, beauty, probability, and whatever else connects them. Reach me at the usual places.</p>
+                </div>
+
+                <div class="contact-links">
+                    <a href="mailto:dmcgaw@gmail.com" class="contact-link">dmcgaw@gmail.com</a>
+                    <a href="https://linkedin.com/in/dmcgaw" class="contact-link" target="_blank" rel="noopener">LinkedIn ↗</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════ -->
+    <footer>
+        <div class="footer-inner">
+            <p>© 2026 David McGaw—mcgaw.net</p>
+            <p>San Francisco Bay Area</p>
+        </div>
+    </footer>
+
+
+    <!-- ═══════════════════════════════════
+         JAVASCRIPT—minimal & purposeful
+    ═══════════════════════════════════ -->
+    <script>
+        // Nav: switch to light mode after scrolling past hero
+        const nav = document.getElementById('nav');
+        const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Reveal elements on scroll via IntersectionObserver
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+        );
+
+        revealEls.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
