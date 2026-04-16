@@ -6,66 +6,23 @@
     <title>David McGaw — Design Strategist</title>
     <meta name="description" content="David McGaw is a Design Strategist and UX Research Lead at Google DeepMind, working at the intersection of human-centered design and artificial intelligence.">
 
-    <!-- Self-hosted webfonts: TC Seraphine (display + body) + TC Petal & Quill (hero name) -->
-    <link rel="preload" href="assets/fonts/seraphine-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/fonts/seraphine-regular-italic.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Self-hosted webfont: TC Petal & Quill (hero name + display headings) -->
     <link rel="preload" href="assets/fonts/petal-quill-regular.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Google Fonts kept as a secondary fallback only (Cormorant Garamond, EB Garamond) -->
+    <!-- EB Garamond (primary body + display serif) and Cormorant Garamond (deep fallback) via Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
     <style>
 
         /* ═══════════════════════════════════
-           SELF-HOSTED WEBFONTS
-           TC Seraphine + TC Petal & Quill, licensed from Tom Chalky.
+           SELF-HOSTED WEBFONT
+           TC Petal & Quill (hero + display headings), licensed from Tom Chalky.
            Converted OTF → WOFF2 for delivery.
+           Body + italic-serif headings use EB Garamond via Google Fonts.
         ═══════════════════════════════════ */
 
-        @font-face {
-            font-family: 'Seraphine';
-            src: url('assets/fonts/seraphine-light.woff2') format('woff2');
-            font-weight: 300;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Seraphine';
-            src: url('assets/fonts/seraphine-light-italic.woff2') format('woff2');
-            font-weight: 300;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Seraphine';
-            src: url('assets/fonts/seraphine-regular.woff2') format('woff2');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Seraphine';
-            src: url('assets/fonts/seraphine-regular-italic.woff2') format('woff2');
-            font-weight: 400;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Seraphine';
-            src: url('assets/fonts/seraphine-bold.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Seraphine';
-            src: url('assets/fonts/seraphine-bold-italic.woff2') format('woff2');
-            font-weight: 700;
-            font-style: italic;
-            font-display: swap;
-        }
         @font-face {
             font-family: 'Petal Quill';
             src: url('assets/fonts/petal-quill-regular.woff2') format('woff2');
@@ -98,10 +55,13 @@
             --hero-fg:      #F5F2EC;   /* text on dark */
             --hero-muted:   rgba(245, 242, 236, 0.52);
 
-            /* ── Typefaces ── */
-            --display: 'Seraphine', 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
-            --body:    'Seraphine', 'EB Garamond', Georgia, 'Times New Roman', serif;
-            --script:  'Petal Quill', 'Seraphine', 'Cormorant Garamond', cursive;
+            /* ── Typefaces ──
+               Body + italic-serif headings: EB Garamond (via Google Fonts).
+               Display "signature" headings (h2/h3 titles): Petal & Quill (self-hosted).
+               Cormorant Garamond and system serifs are deep fallbacks. */
+            --display: 'EB Garamond', 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+            --body:    'EB Garamond', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+            --script:  'Petal Quill', 'EB Garamond', 'Cormorant Garamond', cursive;
 
             /* ── Fluid type scale ── */
             --size-hero:   clamp(5.5rem, 13vw, 12rem);
@@ -140,8 +100,12 @@
             line-height: var(--leading);
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
-            font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
-            font-variant-ligatures: common-ligatures;
+            /* Turn on every ligature class the fonts support — standard, discretionary,
+               historical (the ct/st book ligatures in EB Garamond), and contextual.
+               Old-style figures, kerning, proportional nums rounded out. */
+            font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "hlig" 1, "clig" 1, "onum" 1, "pnum" 1;
+            font-variant-ligatures: common-ligatures discretionary-ligatures historical-ligatures contextual;
+            font-variant-numeric: oldstyle-nums proportional-nums;
         }
 
 
@@ -264,9 +228,12 @@
             margin-bottom: 0.5em;
         }
 
-        /* Ampersand stays in Petal & Quill (inherits from .hero-name) — gently softened
-           so it reads as a conjunction leading into the roles that follow */
+        /* Ampersand set explicitly in Petal & Quill (removes any chance of falling back
+           to a serif italic) and gently softened so it reads as a conjunction leading
+           into the roles that follow */
         .hero-name .amp {
+            font-family: 'Petal Quill', cursive;
+            font-style: normal;
             color: rgba(245, 242, 236, 0.55);
             margin-left: 0.02em;
         }
@@ -451,14 +418,16 @@
             color: var(--text-light);
         }
 
-        /* Text column */
+        /* Text column — h2 set in Petal & Quill (script);
+           scripts are naturally slanted, so italic is not applied;
+           letter-spacing relaxed to 0 (scripts need breathing room). */
         .about-text h2 {
-            font-family: var(--display);
-            font-style: italic;
+            font-family: var(--script);
+            font-style: normal;
             font-weight: 400;
             font-size: var(--size-h1);
-            line-height: 1.08;
-            letter-spacing: -0.015em;
+            line-height: 1.12;
+            letter-spacing: 0;
             color: var(--text);
             margin-bottom: var(--sp-lg);
         }
@@ -537,12 +506,12 @@
         }
 
         .ideas-intro h2 {
-            font-family: var(--display);
-            font-style: italic;
+            font-family: var(--script);
+            font-style: normal;
             font-weight: 400;
             font-size: var(--size-h1);
-            line-height: 1.1;
-            letter-spacing: -0.015em;
+            line-height: 1.15;
+            letter-spacing: 0;
             color: var(--text);
             margin-top: var(--sp-sm);
             margin-bottom: var(--sp-md);
@@ -575,16 +544,21 @@
             background: #E7E2D9;
         }
 
-        /* Large ordinal number—decorative but grounded */
+        /* Large ordinal number—decorative but grounded.
+           Pinned explicitly to EB Garamond (not the script family) so the digits
+           render as EB Garamond's gorgeous old-style figures at display size. */
         .idea-num {
-            font-family: var(--display);
-            font-weight: 300;
+            font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+            font-style: normal;
+            font-weight: 400;
             font-size: 5rem;
             line-height: 1;
             color: var(--rule);
-            letter-spacing: -0.04em;
+            letter-spacing: -0.02em;
             margin-bottom: var(--sp-sm);
             user-select: none;
+            font-variant-numeric: oldstyle-nums proportional-nums;
+            font-feature-settings: "onum" 1, "pnum" 1, "kern" 1;
         }
 
         .idea-tag {
@@ -593,18 +567,15 @@
             text-transform: uppercase;
             color: var(--text-light);
             margin-bottom: var(--sp-xs);
-            /* The tag must NOT absorb flex-grow: 1 from .idea-card p —
-               otherwise in a stretched grid row it pushes h3 and body copy down. */
-            flex-grow: 0;
         }
 
         .idea-card h3 {
-            font-family: var(--display);
-            font-style: italic;
-            font-weight: 500;
+            font-family: var(--script);
+            font-style: normal;
+            font-weight: 400;
             font-size: var(--size-h2);
-            line-height: 1.15;
-            letter-spacing: -0.01em;
+            line-height: 1.2;
+            letter-spacing: 0;
             color: var(--text);
             margin-top: 0;
             margin-bottom: var(--sp-md);
@@ -615,7 +586,6 @@
             line-height: 1.62;
             color: var(--text-muted);
             max-width: 44ch;
-            flex-grow: 1;
         }
 
         .idea-link {
@@ -668,12 +638,12 @@
         }
 
         .contact-text h2 {
-            font-family: var(--display);
-            font-style: italic;
+            font-family: var(--script);
+            font-style: normal;
             font-weight: 400;
             font-size: var(--size-h1);
-            line-height: 1.08;
-            letter-spacing: -0.015em;
+            line-height: 1.12;
+            letter-spacing: 0;
             color: var(--hero-fg);
             margin-top: var(--sp-sm);
         }
@@ -954,7 +924,11 @@
 
 
         .idea-implication {
-            margin-top: 1.25rem;
+            /* margin-top: auto anchors this block to the bottom of the card,
+               so when a row is stretched to match a taller sibling, the extra
+               space lands between the body paragraph and the rule — predictable
+               and symmetric, rather than distributed oddly via flex-grow on <p>. */
+            margin-top: auto;
             padding-top: 1rem;
             border-top: 1px solid var(--rule);
         }
@@ -1367,7 +1341,7 @@
         <div class="section-inner">
 
             <div class="section-label reveal">Current Inspirations</div>
-            <h2 class="reveal delay-1" style="font-family:var(--display);font-style:italic;font-weight:400;font-size:var(--size-h1);line-height:1.1;letter-spacing:-0.015em;color:var(--text);margin-top:var(--sp-sm);">
+            <h2 class="reveal delay-1" style="font-family:var(--script);font-style:normal;font-weight:400;font-size:var(--size-h1);line-height:1.15;letter-spacing:0;color:var(--text);margin-top:var(--sp-sm);">
                 What I’m reading, hearing,<br>and thinking about.
             </h2>
 
