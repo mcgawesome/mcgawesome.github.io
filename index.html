@@ -569,13 +569,16 @@
             margin-bottom: var(--sp-xs);
         }
 
+        /* Card h3s remain italic EB Garamond — four script titles in a 2×2 grid
+           were competing with each other. Italic serif keeps the cards quiet
+           and lets the longer banner h2s carry the Petal & Quill voice. */
         .idea-card h3 {
-            font-family: var(--script);
-            font-style: normal;
-            font-weight: 400;
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 500;
             font-size: var(--size-h2);
-            line-height: 1.2;
-            letter-spacing: 0;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
             color: var(--text);
             margin-top: 0;
             margin-bottom: var(--sp-md);
@@ -1160,7 +1163,10 @@
                 <div class="section-label reveal">Insights about Research Insights</div>
                 <h2 class="reveal delay-1">Handing off context,<br>not summaries.</h2>
                 <p class="reveal delay-2">
-                    Two recent experiments started from the same frustration—that the most valuable user insight rarely reaches product teams in time, and in a form they can use, at the pace of vibe-coded prototyping. The first asked whether research findings could be delivered as serialized, reality-TV-style episodes, low-cost enough to run from any transcript, structured enough to build genuine narrative arc. It worked. Product teams came back for episode two not because they were scheduled to, but because they wanted to know what happened next. More usefully, it surfaced a deeper question. The most valuable artifact turned out not to be the video—it was the structured model of the user that had to be assembled in order to make the video. The second project followed that thread: <em>synthetic personas as contextual engines</em>—portable, warm-data-rich Markdown files a developer can inject into a vibe-coding session so the AI encounters not a feature brief but a specific human life. The quiet reframe underneath both projects is that the handoff model may be wrong. The better move is not to hand off summaries but to hand off context: the user themselves, portable and present in the room.
+                    Two recent UXR experiments started from the same frustration—that the most valuable user insight rarely reaches product teams in time, and in a form they can use, at the pace of vibe-coded prototyping. The first asked whether research findings could be delivered as serialized, reality-TV-style episodes, low-cost enough to run from any transcript, structured enough to build genuine narrative arc. It worked. Product teams came back for episode two not because they were scheduled to, but because they wanted to know what happened next. More usefully, it surfaced a deeper question.
+                </p>
+                <p class="reveal delay-2">
+                    The most valuable artifact turned out not to be the video—it was the structured model of the user that had to be assembled in order to make the video. The second project followed that thread: <em>synthetic personas as contextual engines</em>—portable, warm-data-rich Markdown files a developer can inject into a vibe-coding session so the AI encounters not a feature brief but a specific human life. The quiet reframe underneath both projects is that the handoff model may be wrong. The better move is not to hand off summaries but to hand off context: the user themselves, portable and present in the room.
                 </p>
             </div>
 
