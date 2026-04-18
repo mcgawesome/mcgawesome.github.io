@@ -743,10 +743,40 @@
 
         .insp-item {
             display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
+            flex-direction: row;
+            gap: 1rem;
+            align-items: flex-start;
             padding-bottom: var(--sp-md);
             border-bottom: 1px solid var(--rule);
+        }
+
+        .insp-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .insp-thumb-wrap {
+            display: block;
+            flex-shrink: 0;
+            line-height: 0;
+        }
+
+        .insp-thumb {
+            display: block;
+            width: clamp(88px, 8vw, 104px);
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border: 1px solid var(--rule);
+            filter: saturate(0.9) contrast(0.96);
+            transition: filter 0.4s ease;
+        }
+
+        .insp-thumb-wrap:hover .insp-thumb,
+        .insp-thumb-wrap:focus-visible .insp-thumb {
+            filter: saturate(1) contrast(1);
         }
 
         .insp-category {
@@ -780,6 +810,12 @@
         @media (max-width: 700px) {
             .inspirations-grid {
                 grid-template-columns: 1fr;
+            }
+            .insp-thumb {
+                width: 80px;
+            }
+            .insp-item {
+                gap: 0.85rem;
             }
         }
 
@@ -1355,39 +1391,69 @@
             <div class="inspirations-grid">
 
                 <div class="insp-item reveal delay-1">
-                    <span class="insp-category">Reading</span>
-                    <span class="insp-title">Citizens: A Chronicle of the French Revolution <span class="roman">by Simon Schama</span></span>
-                    <p class="insp-note">A masterclass in the “high-low” synthesis, grounding the metaphysical abstractions of liberty and terror in the visceral, urgent reality of the skyrocketing price of a loaf of bread. Schama’s ability to weave the personal heroism of individuals into the surging tide of the revolution provides a profound mental model for how history is actually lived.</p>
+                    <a class="insp-thumb-wrap" href="https://share.google/E46q4qYOlTyeH0TvG" target="_blank" rel="noopener">
+                        <img class="insp-thumb" src="assets/images/insp-citizens.jpg" alt="Cover of Citizens: A Chronicle of the French Revolution by Simon Schama" loading="lazy">
+                    </a>
+                    <div class="insp-content">
+                        <span class="insp-category">Reading</span>
+                        <span class="insp-title">Citizens: A Chronicle of the French Revolution <span class="roman">by Simon Schama</span></span>
+                        <p class="insp-note">A masterclass in the “high-low” synthesis, grounding the metaphysical abstractions of liberty and terror in the visceral, urgent reality of the skyrocketing price of a loaf of bread. Schama’s ability to weave the personal heroism of individuals into the surging tide of the revolution provides a profound mental model for how history is actually lived.</p>
+                    </div>
                 </div>
 
                 <div class="insp-item reveal delay-2">
-                    <span class="insp-category">Listening</span>
-                    <span class="insp-title">In the Silent Night <span class="roman">(В молчаньи ночи тайной) by Sergei Rachmaninoff</span></span>
-                    <p class="insp-note">As I prepare to sing the <em>All-Night Vigil</em> with the <a href="https://www.sfchoral.org/concerts" target="_blank" rel="noopener">SF Choral Society</a>, Rachmaninoff’s earlier songs demand a different kind of devotion. Studying this piece with my voice teacher has revealed its deeply felt, chromatic nature—a romantic intimacy that feels both unhurried and urgent.</p>
+                    <a class="insp-thumb-wrap" href="https://www.youtube.com/watch?v=FOn6MEJSUyQ&list=RDFOn6MEJSUyQ&start_radio=1" target="_blank" rel="noopener">
+                        <img class="insp-thumb" src="assets/images/insp-rach.jpg" alt="Sergei Rachmaninoff—‘In the Silent Night’" loading="lazy">
+                    </a>
+                    <div class="insp-content">
+                        <span class="insp-category">Listening</span>
+                        <span class="insp-title">In the Silent Night <span class="roman">(В молчаньи ночи тайной) by Sergei Rachmaninoff</span></span>
+                        <p class="insp-note">As I prepare to sing the <em>All-Night Vigil</em> with the <span class="ann ann-r">SF Choral Society<span class="ann-card">My choral home in San Francisco. <a href="https://www.sfchoral.org/concerts" target="_blank" rel="noopener">Upcoming concerts ↗</a></span></span>, Rachmaninoff’s earlier songs demand a different kind of devotion. Studying this piece with my voice teacher has revealed its deeply felt, chromatic nature—a romantic intimacy that feels both unhurried and urgent.</p>
+                    </div>
                 </div>
 
                 <div class="insp-item reveal delay-3">
-                    <span class="insp-category">Looking at</span>
-                    <span class="insp-title roman">“A Lady Receiving Visitors (The Reception)” by John Frederick Lewis</span>
-                    <p class="insp-note">Revisiting this John Frederick Lewis painting at the Yale Center for British Art after thirty-five years was an exercise in the fallibility of memory. While I had misremembered specific elements of the composition, the vibe that drew me in as an undergraduate remained immutable: the masterful curation of light as it filters through stained glass and carved wood screens, dappling every surface and fabric in a liminal glow.</p>
+                    <a class="insp-thumb-wrap" href="https://collections.britishart.yale.edu/catalog/tms:901" target="_blank" rel="noopener">
+                        <img class="insp-thumb" src="assets/images/insp-lewis.jpg" alt="‘A Lady Receiving Visitors (The Reception)’ by John Frederick Lewis" loading="lazy">
+                    </a>
+                    <div class="insp-content">
+                        <span class="insp-category">Looking at</span>
+                        <span class="insp-title roman">“A Lady Receiving Visitors (The Reception)” by John Frederick Lewis</span>
+                        <p class="insp-note">Revisiting this John Frederick Lewis painting at the Yale Center for British Art after thirty-five years was an exercise in the fallibility of memory. While I had misremembered specific elements of the composition, the vibe that drew me in as an undergraduate remained immutable: the masterful curation of light as it filters through stained glass and carved wood screens, dappling every surface and fabric in a liminal glow.</p>
+                    </div>
                 </div>
 
                 <div class="insp-item reveal delay-4">
-                    <span class="insp-category">Thinking about</span>
-                    <span class="insp-title">The Conquest of the Incan Empire <span class="roman">mini-series</span></span>
-                    <p class="insp-note">Listening to this <a href="https://therestishistory.com/episodes/empire-of-gold-part-1" target="_blank" rel="noopener">“The Rest Is History” series</a> has me reflecting on how the collision of two utterly alien civilizations can be viewed as both a grand historical inevitability and a collection of terrifyingly personal encounters.</p>
+                    <a class="insp-thumb-wrap" href="https://therestishistory.com/series/the-fall-of-the-incas" target="_blank" rel="noopener">
+                        <img class="insp-thumb" src="assets/images/insp-incas.jpg" alt="The Fall of the Incas—a series on The Rest Is History" loading="lazy">
+                    </a>
+                    <div class="insp-content">
+                        <span class="insp-category">Thinking about</span>
+                        <span class="insp-title">The Conquest of the Incan Empire <span class="roman">mini-series</span></span>
+                        <p class="insp-note">Listening to this <span class="ann ann-r">“The Rest Is History” series<span class="ann-card">Tom Holland and Dominic Sandbrook, digressive and erudite, turn narrative history into late-night conversation. <a href="https://therestishistory.com/episodes/empire-of-gold-part-1" target="_blank" rel="noopener">Empire of Gold, part 1 ↗</a></span></span> has me reflecting on how the collision of two utterly alien civilizations can be viewed as both a grand historical inevitability and a collection of terrifyingly personal encounters.</p>
+                    </div>
                 </div>
 
                 <div class="insp-item reveal delay-1">
-                    <span class="insp-category">In the field</span>
-                    <span class="insp-title">Muir Woods National Monument</span>
-                    <p class="insp-note">My weekend hikes often take me to more secluded mountains, coastlines, and redwood groves, but the visit of a friend from Florida gave me a reason to return to the oldest, most grand trees nearby. The texture of the trail and the stillness of the redwoods offer a grounded sensory detail that resets the spirit.</p>
+                    <a class="insp-thumb-wrap" href="https://www.nps.gov/muwo/index.htm" target="_blank" rel="noopener">
+                        <img class="insp-thumb" src="assets/images/insp-muir.jpg" alt="Coast redwoods at Muir Woods National Monument" loading="lazy">
+                    </a>
+                    <div class="insp-content">
+                        <span class="insp-category">In the field</span>
+                        <span class="insp-title">Muir Woods National Monument</span>
+                        <p class="insp-note">My weekend hikes often take me to more secluded mountains, coastlines, and redwood groves, but the visit of a friend from Florida gave me a reason to return to the oldest, most grand trees nearby. The texture of the trail and the stillness of the redwoods offer a grounded sensory detail that resets the spirit.</p>
+                    </div>
                 </div>
 
                 <div class="insp-item reveal delay-2">
-                    <span class="insp-category">Re-reading</span>
-                    <span class="insp-title">Gaudy Night <span class="roman">by Dorothy L. Sayers</span></span>
-                    <p class="insp-note">Returning to Harriet Vane in the cloisters of Shrewsbury College, I am struck by the intellectual rigor Sayers demands of her characters. It is a meditation on the ultimate cost of love: the difficult, adult choice to remain vulnerable and accept love... without sacrificing the integrity of the self.</p>
+                    <a class="insp-thumb-wrap" href="https://www.fadedpage.com/showbook.php?pid=20140201" target="_blank" rel="noopener">
+                        <img class="insp-thumb" src="assets/images/insp-gaudy.jpg" alt="Cover of Gaudy Night by Dorothy L. Sayers" loading="lazy">
+                    </a>
+                    <div class="insp-content">
+                        <span class="insp-category">Re-reading</span>
+                        <span class="insp-title">Gaudy Night <span class="roman">by Dorothy L. Sayers</span></span>
+                        <p class="insp-note">Returning to Harriet Vane in the cloisters of Shrewsbury College, I am struck by the intellectual rigor Sayers demands of her characters. It is a meditation on the ultimate cost of love: the difficult, adult choice to remain vulnerable and accept love... without sacrificing the integrity of the self.</p>
+                    </div>
                 </div>
 
             </div>
