@@ -640,15 +640,37 @@
             background: rgba(245, 242, 236, 0.28);
         }
 
-        .contact-text h2 {
+        /* Contact greeting — "You&David" echoes the hero "David&" for a
+           typographic bookend. Both sit on --hero-bg, so the amp can reuse
+           the hero amp's muted-cream treatment exactly. */
+        .contact-greeting {
             font-family: var(--script);
             font-style: normal;
             font-weight: 400;
-            font-size: var(--size-h1);
-            line-height: 1.12;
+            font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+            line-height: 1.02;
             letter-spacing: 0;
             color: var(--hero-fg);
             margin-top: var(--sp-sm);
+            margin-bottom: 0.18em;
+        }
+
+        .contact-greeting .amp {
+            font-family: 'Petal Quill', cursive;
+            font-style: normal;
+            color: rgba(245, 242, 236, 0.55);
+            margin: 0 0.02em;
+        }
+
+        .contact-lead {
+            font-family: var(--script);
+            font-style: normal;
+            font-weight: 400;
+            font-size: clamp(1.85rem, 3.6vw, 2.9rem);
+            line-height: 1.1;
+            letter-spacing: 0;
+            color: var(--hero-fg);
+            margin: 0;
         }
 
         .contact-text p {
@@ -706,6 +728,63 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: rgba(245, 242, 236, 0.18);
+        }
+
+        /* Footer separator — generous whitespace flanking a thin vertical rule */
+        .footer-sep {
+            display: inline-block;
+            margin: 0 1.4em;
+            color: rgba(245, 242, 236, 0.2);
+        }
+
+        /* Footer Colophon trigger — slightly brighter than the surrounding
+           footer text so the eye finds it, but still muted. Inherits uppercase
+           + letter-spacing from `footer p`. */
+        .footer-colophon {
+            color: rgba(245, 242, 236, 0.38);
+        }
+
+        /* Wider, reset-styled variant of the editorial pop-up card, used
+           for the typographic colophon. Overrides the base .ann-card's
+           italic default so <em> spans read as italic within it. */
+        .ann-card-colophon {
+            width: 400px;
+            padding: 1.15rem 1.35rem;
+            font-style: normal;
+            letter-spacing: normal;
+            text-transform: none;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border: 1px solid rgba(245, 242, 236, 0.08);
+        }
+
+        .ann-card-colophon strong {
+            font-weight: 600;
+            color: rgba(245, 242, 236, 0.95);
+        }
+
+        .ann-card-colophon em {
+            font-style: italic;
+            color: rgba(245, 242, 236, 0.55);
+        }
+
+        .ann-card-colophon .colophon-title {
+            display: block;
+            font-family: var(--display);
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: rgba(245, 242, 236, 0.95);
+            margin-bottom: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .ann-card-colophon {
+                width: min(88vw, 400px);
+            }
+            .footer-sep {
+                margin: 0 0.9em;
+            }
         }
 
 
@@ -1082,8 +1161,8 @@
 
             <!-- The portfolio’s "sum of selves" concept, adapted for web -->
             <div class="hero-roles" aria-label="Career roles">
-                <span class="hero-role">Campus Minister</span>
                 <span class="hero-role">Graphic Designer</span>
+                <span class="hero-role">Campus Minister</span>
                 <span class="hero-role">Brand Strategist</span>
                 <span class="hero-role">Choral Musician</span>
                 <span class="hero-role">Management Consultant</span>
@@ -1092,6 +1171,7 @@
                 <span class="hero-role">Innovation Strategist</span>
                 <span class="hero-role">UX Researcher</span>
                 <span class="hero-role">Design Strategist</span>
+                <span class="hero-role">AI Builder</span>
             </div>
 
             <div class="hero-rule" aria-hidden="true"></div>
@@ -1346,7 +1426,7 @@
                 <div class="idea-card reveal delay-2">
                     <div class="idea-num" aria-hidden="true">03</div>
                     <p class="idea-tag">AI · Cognition · Information Design</p>
-                    <h3>Probabilacy <br>(Chances Are, You’re Thinking About it Wrong)</h3>
+                    <h3>“Probabilacy”<br>(Chances Are, You’re Thinking About it Wrong)</h3>
                     <p>
                         Imagine a winding mountain road in thick fog. You have a map—a digital proxy of the terrain—but the immediate challenge is something I’ve come to call <em>probabilacy</em>: the ability to understand and act upon uncertain information. Much like literacy, it’s a capacity most people think they have in greater measure than they do. Not all uncertainty feels the same. <span class="ann">Aleatory uncertainty<span class="ann-card">From Latin <em style="font-style:normal;text-decoration:underline;text-decoration-color:#c0392b;">alea</em> — the die. The same root as Caesar’s “alea iacta est.” Aleatory uncertainty is irreducible: no further information tells you which face will show. The only rational response is to prepare for multiple outcomes simultaneously.</span></span>—pure chance—calls for hedging, keeping options open. Epistemic uncertainty—where a binary truth exists and somebody knows it—generates hunger: users don’t want a cloud of possibilities, they want the answer. When people look at a weather forecast, they’re rarely thinking statistically. Designing for that distinction, rather than papering over it with vague percentages and emoji clouds, is one of the most consequential opportunities in AI-powered information design.
                     </p><br>
@@ -1470,7 +1550,8 @@
 
                 <div class="contact-text">
                     <div class="section-label">Contact</div>
-                    <h2>Let’s think<br>together.</h2>
+                    <h2 class="contact-greeting">You<span class="amp">&amp;</span>David</h2>
+                    <h3 class="contact-lead">Let’s think together.</h3>
                     <p>I’m open to conversations about design, artificial intelligence, beauty, probability, and whatever else connects them. Reach me at the usual places.</p>
                 </div>
 
@@ -1489,7 +1570,7 @@
     ═══════════════════════════════════ -->
     <footer>
         <div class="footer-inner">
-            <p>© 2026 David McGaw—mcgaw.net</p>
+            <p>© 2026 David McGaw—mcgaw.net<span class="footer-sep">|</span><span class="ann footer-colophon">Colophon<span class="ann-card ann-card-colophon"><span class="colophon-title">Type used in this site</span><em>Body:</em> <strong>EB Garamond</strong>, an open-source typeface adapted in 2011 by Georg Mayr-Duffner from the 1592 Egenolff–Berner Garamond specimen book, printed by Conrad Berner at the printing office founded by his father-in-law Christian Egenolff. Original roman letterforms first drawn by Claude Garamont; italics by Robert Granjon.<br><br><em>Headings:</em> <strong>Petal &amp; Quill</strong> by Tom Chalky (available <a href="https://tomchalky.com/product/petal-quill-handwritten-script/" target="_blank" rel="noopener">here ↗</a>), released 2025.</span></span></p>
             <p>San Francisco Bay Area</p>
         </div>
     </footer>
